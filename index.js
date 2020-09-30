@@ -103,7 +103,9 @@ function drawCell(ctx, content, x, y, space, padding, font, color, halign = 'STA
         tX = padding.left + (space.w - padding.left - padding.right - tWidth);
     }
     
-    
+    if(isDebug){
+        console.log(`current color -> ${color}`);
+    }
     ctx.fillStyle = color;
 
     ctx.textBaseline = 'top';
@@ -209,7 +211,7 @@ self.calculate =  function() {
 
 
 self.addRow = function(row, meta) {
-    let inner_meta = Object.assign(defaultCellMeta, meta);
+    let inner_meta = Object.assign({}, defaultCellMeta, meta);
     self.data.push(row);
     
     let hpadding = inner_meta.padding.left + inner_meta.padding.right;
@@ -259,7 +261,9 @@ self.addRow = function(row, meta) {
     self.content_metrix.set(self.data.length - 1, inner_meta);
 };
 
-
+self.addHeader = function(row, meta){
+    self.addRow(row, meta);
+}
 
 self.drawTable = function(){
     let dimension = self.calculate();
