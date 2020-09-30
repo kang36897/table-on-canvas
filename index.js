@@ -1,17 +1,7 @@
 const { createCanvas } = require('canvas');
 const isDebug = false;
 
-const self = {
-    data : [],
-    cols: 0,
-    rows: 0,
-    column_metrix : new Map(),
-    content_metrix : new Map(),
-    global_halign : 'END',
-    global_valign : 'CENTER',
-    border_color : 'rgb(226, 226, 226)',
-    background_color : 'rgb(30, 30, 30)'
-};
+const self = {};
 
 const defaultMargin = {
     top : 16,
@@ -35,8 +25,6 @@ const defaultCellMeta = {
 };
 
 const fs = require('fs');
-const { resolve } = require('path');
-
 
 
 function drawBackground(ctx, x, y, w, h, color) {
@@ -172,8 +160,20 @@ function drawBordersOfTable(ctx, dimension, column_metrix, content_metrix, margi
 
 
 self.createTable = function(){
+    self.data = [];
+    self.cols = 0;
+    self.rows = 0;
+    self.column_metrix = new Map();
+    self.content_metrix = new Map();
+    self.global_halign = 'END';
+    self.global_valign = 'CENTER';
+    self.border_color = 'rgb(226, 226, 226)';
+    self.background_color = 'rgb(30, 30, 30)';
+    
+    
     self.canvas = createCanvas(5, 5);
     self.ctx = self.canvas.getContext('2d');
+   
 }
 
 self.calculate =  function() {
@@ -332,8 +332,9 @@ self.saveToFile = function(canvas, png_image){
         const out = fs.createWriteStream(png_image);
         const stream = canvas.createPNGStream();
         stream.pipe(out);
+        
         out.on('finish', () =>  {
-            console.log('The PNG file was created.');
+            console.log(`The PNG file: ${png_image} was created.`);
             resolve(true);
         });
     });

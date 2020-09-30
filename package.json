@@ -1,6 +1,6 @@
 {
   "name": "table-on-canvas",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "draw a table on the canvas",
   "main": "index.js",
   "scripts": {
