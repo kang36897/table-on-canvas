@@ -34,7 +34,8 @@ const defaultCellMeta = {
     },
 };
 
-const fs = require('fs')
+const fs = require('fs');
+const { resolve } = require('path');
 
 
 
@@ -322,21 +323,18 @@ self.drawTable = function(){
 }
 
 
-self.createTable();
-
-self.addRow({'title': 'title', 'detail': 'detail', 'nums': 'nums'}, { color: 'green'});
-self.addRow({'title': 'hero', 'detail': 'am coming', 'nums': 34}, { color: 'yellow'});
-self.addRow({'title': "what's your name", 'detail': 'you are welcome.', 'nums': '789788999'}, { color: 'green'});
-
-let canvas = self.drawTable();
-
-const out = fs.createWriteStream(__dirname + '/test.png');
-const stream = canvas.createPNGStream();
-stream.pipe(out);
-out.on('finish', () =>  console.log('The PNG file was created.'));
-
-
-
+self.saveToFile = function(canvas, png_image){
+    return new Promise((resolve, reject) => {
+        const out = fs.createWriteStream(png_image);
+        const stream = canvas.createPNGStream();
+        stream.pipe(out);
+        out.on('finish', () =>  {
+            console.log('The PNG file was created.');
+            resolve(true);
+        });
+    });
+ 
+};
 
 
 module.exports = self;

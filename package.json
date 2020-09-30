@@ -15,5 +15,14 @@
   "license": "MIT",
   "dependencies": {
     "canvas": "2.6.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kang36897/table-on-canvas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kang36897/table-on-canvas/issues"
+  },
+  "homepage": "https://github.com/kang36897/table-on-canvas#readme"
 }
