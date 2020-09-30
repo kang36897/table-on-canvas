@@ -334,7 +334,10 @@ self.saveToFile = function(canvas, png_image){
         stream.pipe(out);
         
         out.on('finish', () =>  {
-            console.log(`The PNG file: ${png_image} was created.`);
+            if(isDebug){
+                console.log(`The PNG file: ${png_image} was created.`);
+            }
+            
             resolve(true);
         });
     });
